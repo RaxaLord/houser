@@ -6,6 +6,7 @@ module.exports = {
       .then((results) => res.status(200).send(results))
       .catch((err) => {
         res.status(500).send({ errorMessage: 'Something went wrong' });
+        console.log(err);
       });
   },
 
@@ -18,6 +19,20 @@ module.exports = {
       .catch((err) => {
         res.status(500).send({
           errorMessage: 'Something went wrong.',
+        });
+        console.log(err);
+      });
+  },
+
+  deleteHouse: (req, res, next) => {
+    const db = res.app.get('db');
+    const { id } = req.params;
+
+    db.delete_house()
+      .then(() => res.sendStatus(200))
+      .catch((err) => {
+        res.status(500).send({
+          errorMessage: 'Something went wrong!',
         });
         console.log(err);
       });

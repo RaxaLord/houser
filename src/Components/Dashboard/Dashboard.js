@@ -9,20 +9,26 @@ export default class Dashboard extends Component {
     this.state = {
       houses: [],
     };
+    this.deleteHome = this.deleteHome.bind(this);
   }
 
   componentDidMount() {
-    axios.get('/api/get_homes').then((res) => {
+    axios.get('/api/houses').then((res) => {
       this.setState({
         houses: res.data,
       });
     });
   }
 
+  deleteHome(id) {
+    axios.delete('/api/houses/:id');
+    console.log('button clicked');
+  }
+
   render() {
     const houses = this.state.houses.map((houses, i) => (
       <div>
-        <div key={i}>
+        <div>
           Property Name: {houses.name}
           <br />
           Address: {houses.address}
@@ -33,7 +39,7 @@ export default class Dashboard extends Component {
           <br />
           Zip: {houses.zip}
         </div>
-        <button>Delete</button>
+        <button onClick={this.deleteHome}>Delete</button>
       </div>
     ));
 

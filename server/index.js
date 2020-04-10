@@ -26,8 +26,9 @@ app.use(
   }),
 );
 
-app.get('/api/get_homes', houses_controllers.getAll);
-app.post('/api/add_home', houses_controllers.addHouse);
+app.get('/api/houses', houses_controllers.getAll);
+app.post('/api/houses', houses_controllers.addHouse);
+app.delete('/api/houses/:id', houses_controllers.deleteHouse);
 
 app.listen(
   SERVER_PORT,
